@@ -30,7 +30,7 @@ const getMoviesByTitle = async(req, res) => {
 const getMoviesByID = async(req, res) => {
     try {
         const {id} = req.params;
-        const movie = await movie.findById(id);
+        const movie = await Movie.findById(id);
         if(!movie){
            return res.status(404).json({message: 'No tenemos movies con ese ID'}); 
         }
@@ -75,8 +75,8 @@ const putMovies = async(req, res) => {
         if(!updatedMovie){
             return res.status(404).json({message: 'No tenemos movies con ese ID'}); 
          }
-         if(updatedLibro.portada !== putLibro.portada){
-            deleteFile(updatedLibro.portada);
+         if(updatedMovie.foto !== putMovie.foto){
+            deleteFile(updatedMovie.foto);
         }
         return res.status(200).json(updatedMovie);
     } catch (error) {
